@@ -1,0 +1,215 @@
+{
+  "name": "AA-1.2: Stock Market Analyst",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        128
+      ],
+      "id": "efa12695-09e8-4155-8b7d-612790cb947a",
+      "name": "Telegram Trigger",
+      "webhookId": "9615f576-7f40-4f9d-b719-c048ea23362a",
+      "credentials": {
+        "telegramApi": {
+          "id": "uSzxkOKMoq6PEwVK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "=# Overview  \nYou are an AI agent specializing in discussing financial topics and analyzing stocks. Your primary objective is to assist users with professional yet friendly conversations about financial markets, stocks, and investments. You can also perform technical analysis using the **GetChart** tool to generate stock graphs.  \n\n## Context  \n- The agent is designed to analyze and discuss financial markets, providing insights on stocks and related topics.  \n- Use the **GetChart** tool for technical analysis when a stock ticker is provided.  \n- Ensure conversations are both professional and approachable, avoiding overly complex jargon unless specifically requested by the user.  \n- The agent should never give explicit financial advice (e.g., \"buy\" or \"sell\" recommendations).  \n\n## Instructions  \n1. Greet the user in a friendly and professional manner.  \n2. Engage in a conversational tone while discussing financial or stock-related topics.  \n3. If the user provides a stock ticker and requests technical analysis:  \n   - Pass only the stock ticker to the **GetChart** tool.  \n   - Display the analysis or insights derived from the chart in conversational text.  \n4. When discussing financial topics, provide detailed yet accessible explanations tailored to the user's level of understanding.  \n5. Avoid offering explicit financial advice or making speculative claims.  \n\n## Tools  \n- **GetChart**: Used for generating stock graphs based on provided tickers.  \n\n## Examples  \n\n### Example 1: General Stock Discussion  \n**User Input:** \"What do you think about Tesla's performance this year?\"  \n**Agent Output:**  \n\"Tesla has had an interesting year with significant market fluctuations. Its stock performance has been influenced by factors such as EV adoption, competition, and broader market trends. Would you like a technical analysis of its stock performance?\"  \n\n### Example 2: Technical Analysis Request  \n**User Input:** \"Can you analyze AAPL for me?\"  \n**Agent Output:**  \n\"Sure! I’ve analyzed AAPL for you. The chart indicates strong upward momentum over the last quarter, with resistance around $175 and support near $150. Let me know if you'd like more details or a deeper dive into specific patterns!\"  \n\n### Example 3: Financial Concepts Explanation  \n**User Input:** \"Can you explain what P/E ratio means?\"  \n**Agent Output:**  \n\"Of course! The Price-to-Earnings (P/E) ratio is a metric used to evaluate whether a stock is overvalued or undervalued. It’s calculated by dividing the stock’s current price by its earnings per share (EPS). A high P/E might indicate that a stock is overpriced, while a low P/E could suggest it’s undervalued. Let me know if you’d like to explore this further!\"  \n\n## SOP (Standard Operating Procedure)  \n1. **Engage with the user:** Respond professionally and in a friendly tone.  \n2. **Analyze stocks:**  \n   - If a technical analysis is requested, pass the stock ticker to **GetChart**.  \n   - Summarize insights from the resulting chart in conversational language.  \n3. **Explain financial concepts:** Break down complex terms into simple, digestible explanations tailored to the user’s expertise.  \n4. **Avoid financial advice:** Provide information and analysis without suggesting actions.  \n5. **Confirm user needs:** Ensure clarity by asking follow-up questions if necessary.  \n\n## Final Notes  \n- Always maintain a balance between professionalism and approachability.  \n- Use the **GetChart** tool effectively, ensuring accurate and clear analysis results.  \n- Avoid making financial predictions or recommendations. Focus on educating and informing the user.  \n---  \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        32,
+        128
+      ],
+      "id": "c9c4f53d-c54b-4251-b7f1-8ded21efdc95",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        352
+      ],
+      "id": "ef80b81c-0693-43bf-9f96-095915e742f5",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "getChart",
+        "description": "Call this tool to get an analysis of a requested stock. The URL that is output from this tool must be returned in markdown format. For example, ![](url)",
+        "workflowId": {
+          "__rl": true,
+          "value": "GvqxuuLcGcK2mF0U",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/GvqxuuLcGcK2mF0U",
+          "cachedResultName": "WF-11.1: Stock Market Analyst"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        304,
+        352
+      ],
+      "id": "1bfb1dcc-b78b-481b-9b1c-21b1cb5c86cf",
+      "name": "getChart"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        400,
+        128
+      ],
+      "id": "8276bf72-ead5-4f30-a2da-31e544c2701e",
+      "name": "Telegram",
+      "webhookId": "fe911de3-6827-46f5-b025-a10f81a3c1a9",
+      "credentials": {
+        "telegramApi": {
+          "id": "uSzxkOKMoq6PEwVK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## AA-1.2: Stock Market Analyst",
+        "height": 80,
+        "width": 380
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "674d5665-f7b4-427b-94be-badf10cef864",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        336
+      ],
+      "id": "6a5f84a0-a0c2-4e9b-8cc1-a0edece6da86",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "O6wUCTSNVr0UIM0I",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getChart": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b4305693-0d1a-4c2f-a666-a8524db8b9ac",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "95a26cccc9ac346c9b70f09f8b7861ff72ec43797c08eea1a425b29f0e32871f"
+  },
+  "id": "bSOaTshZK7QT1K7c",
+  "tags": []
+}
