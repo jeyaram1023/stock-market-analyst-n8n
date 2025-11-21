@@ -182,11 +182,15 @@ Ready to automate your stock analysis?
 ## 👨‍💻 About the Developer
 
 **Name:** Jeyaram Reddy  
-**Email:** [jeyaram.reddy.ece@gmail.com](mailto:jeyaram.reddy.ece@gmail.com)  
+**Email:** jeyaram.reddy.ece@gmail.com  
 **GitHub:** [jeyaram1023](https://github.com/jeyaram1023)  
-**Portfolio:** [Click here](https://jeyaram1023.github.io/My-portfolio/)  
+**LinkedIn:** [Jeyaram B](https://www.linkedin.com/in/jeyaram-ece-reddy)  
+**Portfolio**[Click here](https://jeyaram1023.github.io/My-portfolio/).
+
 **Location:** India  
 **Status:** Open to collaboration & freelance automation gigs!
+
+---
 
 ---
 ---
