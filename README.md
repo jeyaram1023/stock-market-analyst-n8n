@@ -1,137 +1,192 @@
-# Stock Market Analyst Agent (n8n workflow)
-
-## Overview
-
-This project implements an automated **Stock Market Analyst Agent** using n8n, Telegram, and AI-powered chart/image analysis. It allows users to:
-- Request and receive stock market analysis via Telegram.
-- Generate charts/images using HTTP APIs.
-- Analyze images and interpret results using AI.
-- Communicate interactively with the agent.
-
-Two workflow models are included:
-- **AA-1.1:** Event-based workflow, focuses on chart/image generation and Telegram notifications.
-
-<img width="991" height="605" alt="Screenshot 2025-11-21 162817" src="https://github.com/user-attachments/assets/de8148a0-86da-4b21-b80b-a7ea6af4d567" />
-
-- 
-- **AA-1.2:** Conversation-based workflow, drives interaction using an integrated AI agent.
-
-<img width="914" height="523" alt="Screenshot 2025-11-21 163252" src="https://github.com/user-attachments/assets/12d2bc9c-e97c-47ed-9679-fa547795a90b" />
-
-## Features
-
-- **Stock Data Analysis**: Automate chart/image generation with HTTP APIs.
-- **Image Analysis**: AI interprets/describes generated chart images.
-- **Telegram Integration**: Trigger, communicate, and receive data directly via Telegram bots.
-- **AI Agent Model**: Utilizes Google Gemini for advanced market insights.
-- **Extensible Workflows**: Easily add more endpoints, signals, or messaging platforms.
-
-## Installation
-
-### Requirements
-
-- **n8n** (Self-hosted or Cloud)
-- **Telegram Bot** (API Token + Username)
-- **Node.js** (>=16.x recommended)
-- Internet access for API requests
-
-### Setup Steps
-
-1. **Fork/Clone this repo**  
-https://github.com/jeyaram1023/stock-market-analyst-n8n.git
+# 🟧 Stock Market Analyst Automation System
 
 
-2. **Install n8n**  
-- Via npm:  
-  ```
-  npm install n8n -g
-  ```
-- Or use [Docker](https://hub.docker.com/r/n8nio/n8n).
+---
 
-3. **Start n8n**  
-- Visit `http://localhost:5678` (default) in your browser.
+<p align="center">
+  <img src="https://img.shields.io/badge/Project-Verified-blue.svg?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/n8n-Automation-success?style=for-the-badge&logo=data:image/svg+xml;base64," />
+  <img src="https://img.shields.io/badge/Telegram-Active-blue?style=for-the-badge&logo=telegram" />
+  <img src="https://img.shields.io/badge/Gemini-Integrated-yellow?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge" />
+</p>
 
-4. **Import Workflows**
-- Download the `.json` workflow files from this repo.
-- In n8n UI, go to **Workflows > Import from File**, select the relevant file.
+---
 
-5. **Telegram Bot Setup**
-- Create a bot via [@BotFather](https://core.telegram.org/bots#botfather).
-- Copy your API token and set it in your n8n Telegram nodes.
+## 🟧 1. Project Overview
 
-6. **API Keys/Endpoints**
-- Set your API endpoints (e.g., for chart generation) within the `HTTP Request` nodes.
+Automated Stock Market Analyst built using **n8n workflow automation**, **Telegram Bot**, and **AI-powered chart/image analysis**.  
+Generates stock charts, analyzes with Gemini, and interprets results—delivered right into Telegram.  
+Supports both event-driven and chat-based market analysis using a user-friendly agent model.
 
-## How to Run
+---
 
-1. **Trigger Event**  
-- Use Telegram to send a message to your bot or execute workflow from another n8n workflow.
-
-2. **Process Workflow**
-- Workflow generates chart/image via external API.
-- AI model analyzes chart/image.
-- Bot sends result/analysis back to Telegram.
-
-3. **Interact & Automate**
-- Ask questions or request charts via Telegram.
-- Get immediate market insights or chart breakdowns.
-
-## Communication
-
-- **Telegram Bot:** All analysis and communication is performed in Telegram.  
-- For event-based actions (AA-1.1), send a signal from n8n or another workflow.
-- For conversation (AA-1.2), type messages to your bot and receive automated replies.
-
-- **Custom Endpoints:**  
-- Extend workflows with new HTTP API endpoints for other financial data/chart services.
-
-## Workflow Explanation
-
-### AA-1.1: Event-Based Model
-- Trigger: Executed by another workflow.
-- Edit Fields: Prepares request data.
-- HTTP Request: Sends data to chart/image API.
-- Analyze Image: AI interprets the generated image.
-- Telegram: Sends analysis to your chat.
-- Edit Fields1: Further manual edits as required.
-
-### AA-1.2: Chat-Based Model
-- Telegram Trigger: Listens for incoming messages.
-- AI Agent: Handles chat communication using Google Gemini, window buffer memory, and chart tools.
-- Telegram: Responds with message/analysis.
-
-## Customization
-
-- Replace `HTTP Request` endpoints with your preferred chart or data APIs.
-- Customize AI agent with any LLM or plugin supported by n8n.
-- Add more platforms or integrations (Discord, WhatsApp, etc.).
-
-## Contact
-
-For questions, requests, collaboration, or support, contact **Jeyaram Reddy**:
-
-- **Email:** jeyaram.reddy.ece@gmail.com
-- **Telegram:** [@JeyaramReddy1023](https://t.me/JeyaramReddy1023)
-- **GitHub Profile:** [jeyaram1023](https://github.com/jeyaram1023)
-- **Location:** Kavali, Andhra Pradesh, India
-
-## License
-
-This repository is open source and freely available for use, modification, and distribution.  
-_Consider giving credit if you use or modify the workflows._
-
-## Screenshots
-
-Include the provided screenshots in your repo as reference for workflow design:
-
-<img width="914" height="523" alt="Screenshot 2025-11-21 163252" src="https://github.com/user-attachments/assets/c02d99ce-8845-4def-802e-4a1711ddaf28" />
-<img width="966" height="589" alt="Screenshot 2025-11-21 162900" src="https://github.com/user-attachments/assets/55bb6beb-bb80-4469-be0a-bde8f5db7685" />
-
-![Screenshot_20251121_161351](https://github.com/user-attachments/assets/d2ae141d-b0e8-4e05-82cb-b7de2aca765f)
+## 🟧 2. System Architecture Diagram
 
 
-## Contribution
+<img width="914" height="523" alt="Screenshot 2025-11-21 163252" src="https://github.com/user-attachments/assets/c9e4d12e-135b-4708-aa8c-260b70c92b45" />
+<img width="966" height="589" alt="Screenshot 2025-11-21 162900" src="https://github.com/user-attachments/assets/7bc232be-b878-40e0-817a-23899b9f5cff" />
 
-Pull requests are welcome! If you'd like to extend functionality, improve documentation, or fix bugs, please submit a PR or email.
 
-**Happy Automating!**
+---
+
+## 🟧 3. Technology Stack
+
+- **n8n**: Visual, code-free workflow automation
+- **Telegram Bot**: User interaction & results delivery
+- **Google Gemini AI**: Powerful chart/image interpretation
+- **HTTP API chart services**: Data visualization
+- **HTML / JS**: (Optional) Portal for advanced triggers
+
+---
+
+## 🟧 4. Features
+
+- Generates market charts automatically via API
+- AI analyzes and explains chart images
+- Delivers instant insights and updates via Telegram
+- Event-driven (AA-1.1) or chat-based (AA-1.2) analysis flows
+- Easily customizable and extensible
+- Quick integration with more APIs/data feeds
+
+---
+
+## 🟧 5. Sample Data and Workflow Files
+
+- **Sample Workflow**: Provided as JSON export, ready to import into n8n
+- **Images for Reference**:
+- ![generated-image (1)](https://github.com/user-attachments/assets/f195f5f2-ff05-4ff4-b779-3a2a6df94679)
+
+- **How to Import**:
+  1. Open n8n dashboard
+  2. Click "Import Workflow"
+  3. Upload workflow JSON, review node config
+
+---
+
+## 🟧 6. Setup Guide
+
+1. **Clone this repo**
+git clone https://github.com/jeyaram1023/stock-market-analyst-n8n.git
+cd stock-market-analyst-n8n
+2. **Install n8n**
+npm install n8n -g
+
+n8n
+- Open `http://localhost:5678` in browser
+
+3. **Telegram Bot Setup**
+- Create bot using [@BotFather](https://t.me/botfather)
+- Set bot token in n8n Telegram node
+
+4. **Import Workflow**
+- Go to Workflows > Import from File
+- Select provided JSON, connect nodes
+
+5. **Configure HTTP API**
+- Chart generation endpoints set in HTTP Request node
+- Add API key if required
+
+---
+
+## 🟧 7. How It Works
+
+- **AA-1.1 (Event Model):**  
+1. Triggered by other workflow or manual execution
+2. Generates and fetches chart image via HTTP API
+3. AI analyzes image for insights
+4. Telegram bot sends message with chart + analysis
+
+- **AA-1.2 (Chat Model):**  
+1. User sends query to Telegram bot
+2. AI Agent (Gemini) interprets request
+3. Workflow fetches/generates chart & analyzes
+4. Result delivered in chat with context memory
+
+---
+
+## 🟧 8. Communication
+
+- All user-facing messages via Telegram bot
+- Fully interactive chat for stock queries, follow-ups
+- Event signals trigger analysis workflows instantly
+
+---
+
+## 🟧 9. Customization
+
+- Change chart API endpoints as needed
+- Plug in any AI service supported by n8n (OpenAI, Gemini, etc.)
+- Add more triggers: Discord, WhatsApp, Email alert, etc.
+
+---
+
+## 🟧 10. Example Telegram Output
+
+> 📊 Stock Chart:
+> ![stock_assignment_telegram](https://github.com/user-attachments/assets/74db4624-d709-40df-b7e2-0f5a77b2bd0d)
+
+> <img width="800" height="600" alt="9e3752f2-bfb4-42b6-a8f7-af646dccf191" src="https://github.com/user-attachments/assets/c64aba83-1e33-4f1d-b295-1ed4460927ef" />
+> "Gemini analysis: Uptrend expected due to volume spike and positive momentum indicator. Consider entry above last resistance zone."
+
+---
+
+## 🟧 11. Error Handling
+
+- **Telegram not sending:** Check bot token & chat ID
+- **API request failed:** Verify endpoint, credentials in HTTP node
+- **Image not analyzed:** Confirm AI agent tool config
+- **Workflow not triggering:** Activate workflow, check triggers
+
+---
+
+## 🟧 12. Security Tips
+
+- Protect all API Keys & bot tokens in n8n credentials
+- Do not expose sensitive workflow URLs in public portals
+- Secure webhooks with n8n authentication if opening externally
+
+---
+
+## 🟧 13. Future Upgrades
+
+- Integrate more data feeds (Yahoo Finance, Alpha Vantage)
+- Add multi-user dashboard & admin controls
+- PDF export of chart analysis
+- Automatic periodic market reports
+
+---
+
+## 🟧 14. Credits
+
+- **Developer:** Jeyaram Reddy
+- **Tools:** n8n, Gemini, Telegram Bot API
+- **License:** MIT
+
+---
+
+## ⭐ Quickstart
+
+1. Fork & clone repo
+2. Import workflow JSON in n8n
+3. Set up Telegram bot and API config
+4. Trigger workflow & chat with bot for instant market analysis!
+
+---
+
+Ready to automate your stock analysis?  
+**Fork, setup, and deploy your own market agent today!**
+
+---
+
+## 👨‍💻 About the Developer
+
+**Name:** Jeyaram Reddy  
+**Email:** [jeyaram.reddy.ece@gmail.com](mailto:jeyaram.reddy.ece@gmail.com)  
+**GitHub:** [jeyaram1023](https://github.com/jeyaram1023)  
+**Portfolio:** [Click here](https://jeyaram1023.github.io/My-portfolio/)  
+**Location:** India  
+**Status:** Open to collaboration & freelance automation gigs!
+
+---
+---
